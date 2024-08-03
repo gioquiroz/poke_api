@@ -1,18 +1,17 @@
+const tableBody = document.getElementById('tableMainBody')
 const fetchData = async () => {
-    let pokeApi = 'https://pokeapi.co/api/v2/pokemon/56';
+    let pokeApi = 'https://pokeapi.co/api/v2/pokemon';
     try {
         const response = await fetch(pokeApi)
         const data = await response.json()
-        let pokeCard = `
-            <div class="col-12 col-md-3">
-                <img src="">
-                <span>${id}</span>
-                <h3>Nombre: ${name}</h3>
-
-            </div>
-        `
+        console.log(data)
+        let pokeCard = ''
+        data.forEach(element => {
+            console.log("entre" + element);
+        })
+        /* tableBody.innerHTML = pokeCard */
     } catch (error) {
-        console.log(error);
+        console.log('Encontre el siguiente error: ' + error);
     }
 }
 fetchData()
