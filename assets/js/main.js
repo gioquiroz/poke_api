@@ -1,10 +1,9 @@
-//? en cuanto cargue el documeto se hace la llamada de la api.
-
-
-    //cuerpo principal de la llamada de la api
+//? when DOM is load the functions starts.
+document.addEventListener("DOMContentLoaded", () => {
+    //body to insert cards 
     const  tableBody = document.getElementById('tableMainBody')
 
-    // recorrido de cada ID de los pokemon
+    // loop of ID of the pokemon, limit 100
     let limit = 100
     const bucleIdPokemon = async () => {
         for (let i = 1; i <= limit; i++) {
@@ -30,12 +29,12 @@
     }
     
 
-    // función para printiar los pokemon
+    // function to print pokemon on cards
     const printPokemon = (pokemon) => {
         const pokeCard = `
                 <div class="mainCard">
                     <div class="contentCard">
-                        <img src="${pokemon.sprites.other.dream_world.front_default}" alt="">
+                        <img src="${pokemon.sprites.other.dream_world.front_default}" alt="${pokemon.name}" class="poke-image">
                         <div class="textCard">
                             <span class="pokeId">${pokemon.id}</span>
                             <span class="pokeName">${pokemon.name}</span>
@@ -45,7 +44,8 @@
                 </div>
             `
         tableBody.innerHTML += pokeCard
-        
-        
     }
     bucleIdPokemon()
+})
+
+    

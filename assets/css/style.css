@@ -18,3 +18,11 @@
 h1 {
     color: blue;
 }
+#tableMainBody .contentCard {
+    display: flex;
+}
+#tableMainBody .mainCard .contentCard img.poke-image {
+    width: 130px;
+    height: auto;
+    object-fit: cover;
+}
