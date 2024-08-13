@@ -35,7 +35,7 @@
         const pokeCard = `
                 <div class="mainCard">
                     <div class="contentCard">
-                        <img src="" alt="">
+                        <img src="${pokemon.sprites.other.dream_world.front_default}" alt="">
                         <div class="textCard">
                             <span class="pokeId">${pokemon.id}</span>
                             <span class="pokeName">${pokemon.name}</span>
@@ -49,4 +49,3 @@
         
     }
     bucleIdPokemon()
-    
