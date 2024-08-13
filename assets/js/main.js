@@ -5,7 +5,7 @@
     const  tableBody = document.getElementById('tableMainBody')
 
     // recorrido de cada ID de los pokemon
-    let limit = 10
+    let limit = 100
     const bucleIdPokemon = async () => {
         for (let i = 1; i <= limit; i++) {
             console.log(i)
@@ -16,6 +16,7 @@
     const getDataPokemon = async (id) => {
         // url api
         let pokeApi = `https://pokeapi.co/api/v2/pokemon/${id}`;
+        console.log(pokeApi)
         try {
             //! llamada a la api
             const response = await fetch(pokeApi)
@@ -43,24 +44,9 @@
                     </div>
                 </div>
             `
-        tableBody.innerHTML = pokeCard
-        /* pokemon.abilities.forEach(element => {
-            console.log(element)
-            const pokeCard = `
-                <div class="mainCard">
-                    <div class="contentCard">
-                        <img src="" alt="">
-                        <div class="textCard">
-                            <span class="pokeId">${element.id}</span>
-                            <span class="pokeName">${element.name}</span>
-                            <span class="pokeUrl">${element.url}</span>
-                        </div>
-                    </div>
-                </div>
-            `
-            tableBody.innerHTML = pokeCard
-        }) */
+        tableBody.innerHTML += pokeCard
+        
         
     }
     bucleIdPokemon()
-    /* getDataPokemon() */
+    
