@@ -18,3 +18,17 @@
 h1 {
     color: blue;
 }
+#tableMainBody {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+#tableMainBody .contentCard {
+    display: flex;
+}
+#tableMainBody .mainCard .contentCard img.poke-image {
+    width: 130px;
+    height: auto;
+    object-fit: cover;
+}
