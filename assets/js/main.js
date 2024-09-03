@@ -50,6 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
             //! respuesta de la api
             const data = await response.json()
             nextPokemon = data.next
+            previousPokemon = data.previous
             console.log("upa", nextPokemon);
 
             console.log(data)
@@ -72,10 +73,19 @@ document.addEventListener("DOMContentLoaded", () => {
         <button class="footBtn ms-2" id="btn-prev">Cargar menos <i class="fa-solid fa-angle-up"></i></button>
         `
 
-    /* const buttonPrevious = document.getElementById('btn-prev') */
+    // función para cargar mas pokemon
     let buttonNext = document.getElementById('btn-next')
     buttonNext.addEventListener('click', (e) => {
+        e.preventDefault()
         getDataPokemon(nextPokemon)
+    })
+
+    // función para cargar menos pokemon
+    let buttonPrev = document.getElementById('btn-prev')
+    buttonPrev.addEventListener('click', (e) => {
+        getDataPokemon()
+        e.preventDefault()
+        getDataPokemon(previousPokemon)
     })
 
 
@@ -90,8 +100,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         <span class="pokeId">Id #${pokemon.id}</span>
                         <span class="pokeName">${capitalizeFirstLetterPokeName(pokemon.name)}</span>
                         <span class="height">Peso: ${pokemon.height}</span>
-                    </div>
+                    </div> 
                 </div>
+                <span class="isFavorite"><i class="fa-regular fa-heart"></i></span>
             </div>
         `
         tableBody.innerHTML += pokeCard
