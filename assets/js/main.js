@@ -4,15 +4,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const tableBody = document.getElementById('tableMainBody')
     const inptPokeBall = document.getElementById('pokeball')
     const optionsTypePokemon = document.getElementById('typePokemon')
+    const footerNextPrev = document.getElementById('mainFooter')
+    /* let morePokemon = "https://pokeapi.co/api/v2/pokemon?offset=20&limit=20"
+    let lessPokemonn = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20" */
 
-    // loop of ID of the pokemon, limit 100
-    let limit = 8
-    const bucleIdPokemon = async () => {
-        for (let i = 1; i <= limit; i++) {
-            console.log(i)
-            await getDataPokemon(i)
-        }
-    }
+    // url api
+    let pokeApi = 'https://pokeapi.co/api/v2/pokemon?limit=21'
+
+
 
     // Function to get pokemon Type using Fetch
     const getPokemonType = async () => {
@@ -38,29 +37,50 @@ document.addEventListener("DOMContentLoaded", () => {
             optionsTypePokemon.innerHTML += typeOptions
         });
     }
+
     // Function to get pokemon using fetch
-    const getDataPokemon = async (id) => {
-        // url api
-        let pokeApi = `https://pokeapi.co/api/v2/pokemon/${id}`;
-        console.log(pokeApi)
+    const getDataPokemon = async (url) => {
+
+        console.log(url)
         try {
             //! llamada a la api
-            const response = await fetch(pokeApi)
+            const response = await fetch(url)
+            console.log(response);
+
             //! respuesta de la api
             const data = await response.json()
-            console.log(data)
+            nextPokemon = data.next
+            console.log("upa", nextPokemon);
 
-            printPokemon(data)
-            /* printOptionsPokemon(dataType) */
+            console.log(data)
+            //! uso del metodo for...of para ejecutar acción en cada elemento de un objeto iterable (string, array)
+            for (let index of data.results) {
+                const pokeResults = await fetch(index.url).then(res => res.json())
+
+                //printPokemon(data)
+                printPokemon(pokeResults)
+            }
+            /* loopPokeData(data) */
         } catch (error) {
             console.log('Encontre el siguiente error: ' + error);
         }
     }
 
+    // botones de mas o menos pokemon en el footer
+    footerNextPrev.innerHTML += `
+        <button class="footBtn me-2" id="btn-next">Cargar mas <i class="fa-solid fa-angle-down"></i></button>
+        <button class="footBtn ms-2" id="btn-prev">Cargar menos <i class="fa-solid fa-angle-up"></i></button>
+        `
+
+    /* const buttonPrevious = document.getElementById('btn-prev') */
+    let buttonNext = document.getElementById('btn-next')
+    buttonNext.addEventListener('click', (e) => {
+        getDataPokemon(nextPokemon)
+    })
+
+
     // function to print pokemon on cards
     const printPokemon = (pokemon) => {
-        let lenArrType = pokemon.types.length
-        console.log(lenArrType)
         const pokeCard = `
             <div class="mainCard">
                 <div class="contentCard">
@@ -75,18 +95,16 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         `
         tableBody.innerHTML += pokeCard
-
     }
 
-    // function to UpperCase the name of pokemon
-
+    // function to UpperCase the the firstLetter 
     const capitalizeFirstLetterPokeName = (pokename) => {
         return pokename.charAt(0).toUpperCase() + pokename.slice(1)
     }
 
     // Función para hacer la llamada de la aparición del popUp para busqueda de pokemon
     inptPokeBall.addEventListener('click', async (e) => {
-        e.preventDefault
+        e.preventDefault()
         const { value: formValues } = await Swal.fire({
             title: "Busca tu Pokémon",
             html: `
@@ -102,7 +120,6 @@ document.addEventListener("DOMContentLoaded", () => {
             Swal.fire(JSON.stringify(formValues));
         }
     })
-    bucleIdPokemon()
+    // function call's to pokemon type
+    getDataPokemon(pokeApi)
 })
-
-

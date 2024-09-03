@@ -162,6 +162,22 @@ select::-ms-expand {
     transition: transform .3s ease;
 }
 
+#mainFooter {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3.15vw;
+}
+
+.footBtn {
+    width: 8vw;
+    height: 2.5vw;
+    border-radius: 30px;
+    background-color: var(--white);
+    border: 1px solid transparent;
+    box-shadow: 5px 6px 7px rgba(0, 0, 0, .5);
+}
 
 /* << Media Queries >> */
 
