@@ -131,6 +131,20 @@ select::-ms-expand {
     font-weight: 600;
 }
 
+#tableMainBody .isFavorite {
+    display: inline-block;
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+    cursor: pointer;
+    filter: drop-shadow(4px 4px 3px black);
+}
+
+#tableMainBody .isFavorite>i {
+    font-size: 1.5rem;
+    color: var(--white);
+}
+
 .selectorPokeBall {
     position: fixed;
     bottom: 2%;
